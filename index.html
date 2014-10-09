@@ -1,0 +1,87 @@
+<!doctype html>
+<html>
+  <head>
+    <meta name="viewport" content="width=device-width" />
+    <link rel="stylesheet" href="index.css" />
+  </head>
+  <body ng-app="LinkedInHotOrNot">
+
+    <div class="container">
+
+
+      <div ng-controller="voteController">
+
+        <div ng-hide="loggedIn">
+          <!--<script type="IN/Login"></script>-->
+          <button ng-click="login($event)">Login with LinkedIn</button>
+        </div>
+
+        <div ng-show="person">
+          <div class="person panel">
+            <div class="person-picture">
+              <img class="" ng-src="{{ person.pictureUrls.values[0] }}"
+                ng-show="person.pictureUrl" />
+              <img class="" ng-src="{{ defaultPictureUrl }}"
+                ng-hide="person.pictureUrl" />
+            </div>
+            <div class="">
+              <div class="">
+                {{ person.firstName }} {{ person.lastName }}
+              </div>
+              <div class="">
+                <a target="_blank" ng-href="{{ person.publicProfileUrl }}">profile</a>
+              </div>
+            </div>
+            <div class="votes">
+              Hot: {{ person.votes.up }}
+              Not: {{ person.votes.down }}
+            </div>
+            <div class="vote">
+              <button class="btn btn-lg btn-success"
+                ng-disabled="voting"
+                ng-click="vote('up')"
+                >Hot</button>
+              <button class="btn btn-lg btn-danger"
+                ng-disabled="voting"
+                ng-click="vote('down')"
+                >Not</button>
+              <button class="btn btn-lg"
+                ng-click="prev()"
+                >Prev</button>
+              <button class="btn btn-lg"
+                ng-click="next()"
+                >Next</button>
+            </div>
+          </div>
+        </div>
+
+        <div ng-show="people">
+          <ul class="people list-unstyled">
+            <li class="media" ng-repeat="person in peopleQueue">
+              <a class="block clearfix" href="#" ng-click="selectPerson($event, person)">
+                <div class="pull-left">
+                  <img class="media-object" ng-src="{{ person.pictureUrl }}"
+                    ng-show="person.pictureUrl" />
+                  <img class="media-object" ng-src="{{ defaultPictureUrl }}"
+                    ng-hide="person.pictureUrl" />
+                </div>
+                <div class="media-body">
+                  {{person.firstName}} {{ person.lastName }}
+                </div>
+              </a>
+            </li>
+          </ul>
+        </div>
+
+      </div>
+
+    </div>
+
+    <script type="text/javascript" src="//platform.linkedin.com/in.js?async=true"></script>
+    <script src="bower_components/jquery/dist/jquery.js"></script>
+    <script src="bower_components/lodash/dist/lodash.js"></script>
+    <script src="bower_components/angular/angular.js"></script>
+    <script src="index.js"></script>
+
+  </body>
+</html>

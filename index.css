@@ -1,0 +1,27 @@
+@import url("bower_components/bootstrap/dist/css/bootstrap.css");
+
+.block {
+  display: block;
+}
+
+.person img {
+  width: 100%;
+}
+
+.person .person-picture {
+  width: 200px;
+  height: 200px;
+  overflow: hidden;
+}
+
+.people img {
+  width: 32px;
+}
+
+.people li {
+  
+}
+.people li.active {
+  background: #ddd;
+}
+
